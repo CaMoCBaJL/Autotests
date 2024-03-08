@@ -7,13 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Selenium.Firefox.WebDriver" Version="0.27.0" />
-    <PackageReference Include="Selenium.WebDriver" Version="4.18.1" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="122.0.6261.11100" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Autotests.PlatformAdapter.Shared\Autotests.PlatformAdapter.Shared.csproj" />
+    <ProjectReference Include="..\Autotests.Tests.ArtNow.Constants\Autotests.Tests.ArtNow.Shared.csproj" />
+    <ProjectReference Include="..\Autotests.TestUnits\Autotests.TestUnits.csproj" />
   </ItemGroup>
 
 </Project>

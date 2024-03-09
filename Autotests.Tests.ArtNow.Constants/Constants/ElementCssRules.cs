@@ -6,7 +6,7 @@
 
         public const string SearchBar = "search-bar";
 
-        public const string InputSearchBar = "inp scLarge";
+        public const string InputSearchBar = "inp.scLarge";
 
         public const string BodyWrapper = "wrapper";
 
@@ -18,7 +18,7 @@
 
         public const string ItemName = "ssize";
 
-        public const string SearchButton = "control scLarge";
+        public const string SearchButton = "control.scLarge";
 
         public const string TopMenu = "topmenu";
     }

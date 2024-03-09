@@ -13,12 +13,101 @@ namespace Autotests.Tests.ArtNow.Pages
         {
             base.CreatePageContent();
 
-            _pageElements.Add(ElementCssRules.SearchBar, new DomElement() { InitializerFunction = FindSearchBar });
-            _pageElements.Add(ElementCssRules.InputSearchBar, new DomElement() { InitializerFunction = FindSearchBarInput });
-            _pageElements.Add(ElementCssRules.LeftShellNavigation, new DomElement() { InitializerFunction = FindArtTypesList });
-            _pageElements.Add(ElementCssRules.ContentContainer, new DomElement() { InitializerFunction = FindPaintingsContainer });
-            _pageElements.Add(ElementCssRules.SearchButton, new DomElement() { InitializerFunction = FindSearchButton });
-            _pageElements.Add(ElementNames.CatalogButton, new DomElement() { InitializerFunction = FindCatalogButton });
+            _pageElements.Add(ElementCssRules.Header, new DomElement()
+            {
+                InitializerFunction = driver =>
+                {
+                    var headerSelector = new CssRuleFactory()
+                        .WithTag(HtmlTagNames.Division)
+                        .WithClass(ElementCssRules.Header)
+                        .CompileRule();
+
+                    return driver.FindElement(By.CssSelector(headerSelector));
+                }
+            });
+
+            _pageElements.Add(ElementCssRules.SearchBar, new DomElement()
+            {
+                InitializerFunction = _ =>
+                {
+                    var searchBarSelector = new CssRuleFactory()
+                        .WithTag(HtmlTagNames.Span)
+                        .WithClass(ElementCssRules.SearchBar)
+                        .CompileRule();
+
+                    return _pageElements.GetValueOrDefault(ElementCssRules.Header)?.Element?.FindElement(By.CssSelector(searchBarSelector));
+                }
+            });
+
+            _pageElements.Add(ElementCssRules.InputSearchBar, new DomElement()
+            {
+                InitializerFunction = _ =>
+                {
+                    var searchBarElement = _pageElements.GetValueOrDefault(ElementCssRules.SearchBar)?.Element;
+
+                    var inputSearchBarSelector = new CssRuleFactory()
+                        .WithTag(HtmlTagNames.Input)
+                        .WithClass(ElementCssRules.InputSearchBar)
+                        .CompileRule();
+
+                    return searchBarElement?.FindElement(By.CssSelector(inputSearchBarSelector));
+                }
+            });
+
+            _pageElements.Add(ElementCssRules.SearchButton, new DomElement()
+            {
+                InitializerFunction = _ =>
+                {
+                    var searchButtonSelector = new CssRuleFactory()
+                        .WithTag(HtmlTagNames.Button)
+                        .WithClass(ElementCssRules.SearchButton)
+                        .CompileRule();
+
+                    return _pageElements.GetValueOrDefault(ElementCssRules.Header)?.Element?.FindElement(By.CssSelector(searchButtonSelector));
+                }
+            });
+
+            _pageElements.Add(ElementCssRules.TopMenu, new DomElement()
+            {
+                InitializerFunction = driver =>
+                {
+                    var topMenuSelector = new CssRuleFactory()
+                        .WithTag(HtmlTagNames.Division)
+                        .WithClass(ElementCssRules.TopMenu)
+                        .CompileRule();
+
+                    return driver.FindElement(By.CssSelector(topMenuSelector));
+                }
+            });
+
+            _pageElements.Add(ElementNames.CatalogButton, new DomElement() 
+            { 
+                InitializerFunction = _ =>
+                {
+                    var topMenuElements = _pageElements.GetValueOrDefault(ElementCssRules.TopMenu)?.Element
+                        .FindElements(By.TagName(HtmlTagNames.UnorderedList)).FirstOrDefault(); ;
+
+                    var catalogsSelector = new CssRuleFactory()
+                        .WithTag(HtmlTagNames.ListItem)
+                        .WithChild(HtmlTagNames.Anchor)
+                        .CompileRule();
+
+                    return topMenuElements?.FindElement(By.CssSelector(catalogsSelector));
+                } 
+            });
+
+            _pageElements.Add(ElementCssRules.ContentContainer, new DomElement() 
+            { 
+                InitializerFunction = driver =>
+                {
+                    var contentContainer = new CssRuleFactory()
+                        .WithTag(HtmlTagNames.Division)
+                        .WithClass(ElementCssRules.ContentContainer)
+                        .CompileRule();
+
+                    return driver.FindElement(By.CssSelector(contentContainer));
+                }
+            });
         }
 
         public static new HomePage Create(IWebDriver webDriver)
@@ -37,60 +126,6 @@ namespace Autotests.Tests.ArtNow.Pages
             }
 
             return homePage;
-        }
-
-        private IWebElement FindCatalogButton(IWebDriver driver)
-        {
-            var topMenu = driver.FindElement(By.CssSelector(ElementCssRules.TopMenu));
-
-            return topMenu.FindElements(By.TagName(HtmlTagNames.Ul)).FirstOrDefault();
-        }
-
-        private IWebElement FindSearchButton(IWebDriver driver)
-        {
-            var header = driver.FindElement(By.CssSelector(ElementCssRules.Header));
-
-            var searchBarElement = header?.FindElement(By.CssSelector(ElementCssRules.SearchButton));
-
-            return searchBarElement;
-        }
-
-        private IWebElement FindPaintingsContainer(IWebDriver driver)
-        {
-            return driver.FindElement(By.CssSelector(ElementCssRules.ContentContainer));
-        }
-
-        private IWebElement FindSearchBar(IWebDriver driver)
-        {
-            var headerSelector = new CssRuleFactory()
-                .WithTag(HtmlTagNames.Div)
-                .WithClass(ElementCssRules.Header)
-                .CompileRule();
-
-            var header = driver.FindElement(By.CssSelector(headerSelector));
-
-            var searchBarSelector = new CssRuleFactory()
-                .WithTag(HtmlTagNames.Span)
-                .WithClass(ElementCssRules.SearchBar)
-                .CompileRule();
-
-            var searchBarElement = header?.FindElement(By.CssSelector(searchBarSelector));
-
-            return searchBarElement;
-        }
-
-        private IWebElement FindSearchBarInput(IWebDriver driver)
-        {
-            var searchBar = FindSearchBar(driver);
-
-            return searchBar?.FindElement(By.CssSelector(ElementCssRules.InputSearchBar));
-        }
-
-        private IWebElement FindArtTypesList(IWebDriver driver)
-        {
-            var shellNavigation = driver.FindElement(By.CssSelector(ElementCssRules.LeftShellNavigation));
-
-            return shellNavigation?.FindElements(By.TagName(HtmlTagNames.Ul))?.Skip(1)?.Take(1)?.FirstOrDefault();
         }
 
         public void Search(IWebDriver driver, string searchQuery)

@@ -34,6 +34,13 @@ namespace Autotests.PlatformAdapter.Web
             return this;
         }
 
+        public CssRuleFactory WithChild(string child)
+        {
+            _rule.Append($" > {child}");
+
+            return this;
+        }
+
         public string CompileRule() => _rule.ToString();
     }
 }

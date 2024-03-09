@@ -7,11 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Autotests.PlatformAdapter.Shared\Autotests.PlatformAdapter.Shared.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Web\Validation\Exceptions\" />
+    <ProjectReference Include="..\Autotests.Tests.ArtNow\Autotests.Tests.ArtNow.Pages.csproj" />
+    <ProjectReference Include="..\UseCases\Autotests.UseCases.csproj" />
   </ItemGroup>
 
 </Project>

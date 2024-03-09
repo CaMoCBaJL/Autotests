@@ -2,6 +2,10 @@
 {
     public class HtmlTagNames
     {
-        public const string UlTag = "ul";
+        public const string Ul = "ul";
+
+        public const string Div = "div";
+
+        public const string Span = "span";
     }
 }

@@ -11,5 +11,15 @@
         public const string BodyWrapper = "wrapper";
 
         public const string LeftShellNavigation = "left_container";
+
+        public const string ContentContainer = "content_container";
+
+        public const string Post = "post";
+
+        public const string ItemName = "ssize";
+
+        public const string SearchButton = "control scLarge";
+
+        public const string TopMenu = "topmenu";
     }
 }

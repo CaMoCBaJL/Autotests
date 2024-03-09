@@ -9,7 +9,7 @@ namespace Autotests.PlatformAdapter.Web
     public class BrowserAdapter: TestPlatform
     {
         private readonly string _url;
-        private WebDriver _driver;
+        private IWebDriver _driver;
 
         public BrowserAdapter(string webSiteUrl) 
         {
@@ -31,6 +31,8 @@ namespace Autotests.PlatformAdapter.Web
             }
         }
 
+        public IWebDriver WebDriver { get => _driver; }
+
         public void OpenUrl()
         {
             _driver.Navigate().GoToUrl(_url);
@@ -45,6 +47,7 @@ namespace Autotests.PlatformAdapter.Web
         {
             screenshot.SaveAsFile(fileName);
         }
+
         ~BrowserAdapter() 
         {
             _driver.Quit();

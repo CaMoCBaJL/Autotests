@@ -3,6 +3,7 @@ using Autotests.PlatformAdapter.Shared.Enums;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Support.UI;
 
 namespace Autotests.PlatformAdapter.Web
 {
@@ -36,6 +37,9 @@ namespace Autotests.PlatformAdapter.Web
         public void OpenUrl()
         {
             _driver.Navigate().GoToUrl(_url);
+
+            new WebDriverWait(_driver, PlatformConstants.DefaultBroswserActionTimeout).Until(
+                d => ((IJavaScriptExecutor)d).ExecuteScript("return document.readyState").Equals("complete"));
         }
         
         public Screenshot CreateScreenShot()

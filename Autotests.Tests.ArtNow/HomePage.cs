@@ -1,4 +1,5 @@
-﻿using Autotests.PlatformAdapter.Shared.Entities;
+﻿using Autotests.PlatformAdapter;
+using Autotests.PlatformAdapter.Shared.Entities;
 using Autotests.PlatformAdapter.Web;
 using Autotests.Tests.ArtNow.Shared.Constants;
 using Autotests.TestUnits.Web;
@@ -80,8 +81,8 @@ namespace Autotests.Tests.ArtNow.Pages
                 }
             });
 
-            _pageElements.Add(ElementNames.CatalogButton, new DomElement() 
-            { 
+            _pageElements.Add(ElementNames.CatalogButton, new DomElement()
+            {
                 InitializerFunction = _ =>
                 {
                     var topMenuElements = _pageElements.GetValueOrDefault(ElementCssRules.TopMenu)?.Element
@@ -89,23 +90,24 @@ namespace Autotests.Tests.ArtNow.Pages
 
                     var catalogsSelector = new CssRuleFactory()
                         .WithTag(HtmlTagNames.ListItem)
-                        .WithChild(HtmlTagNames.Anchor)
+                        .WithChild()
+                        .WithTag(HtmlTagNames.Anchor)
                         .CompileRule();
 
                     return topMenuElements?.FindElement(By.CssSelector(catalogsSelector));
-                } 
+                }
             });
 
-            _pageElements.Add(ElementCssRules.ContentContainer, new DomElement() 
-            { 
+            _pageElements.Add(ElementCssRules.ContentContainer, new DomElement()
+            {
                 InitializerFunction = driver =>
                 {
-                    var contentContainer = new CssRuleFactory()
+                    var contentContainerSelector = new CssRuleFactory()
                         .WithTag(HtmlTagNames.Division)
                         .WithClass(ElementCssRules.ContentContainer)
                         .CompileRule();
 
-                    return driver.FindElement(By.CssSelector(contentContainer));
+                    return driver.FindElement(By.CssSelector(contentContainerSelector));
                 }
             });
         }
@@ -116,30 +118,52 @@ namespace Autotests.Tests.ArtNow.Pages
 
             homePage.CreatePageContent();
             homePage.ValidatePageContent();
-            try
-            {
-                homePage.InitializePageContent(webDriver);
-            }
-            finally
-            {
-                webDriver.Quit();
-            }
+            homePage.InitializePageContent(webDriver);
 
             return homePage;
         }
 
-        public void Search(IWebDriver driver, string searchQuery)
+        public List<IWebElement> Search(IWebDriver driver, string searchQuery)
         {
             _pageElements.GetValueOrDefault(ElementCssRules.InputSearchBar)?.Element?.SendKeys(searchQuery);
 
             _pageElements.GetValueOrDefault(ElementCssRules.SearchButton)?.Element?.Click();
 
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
+            var wait = new WebDriverWait(driver, PlatformConstants.DefaultBroswserActionTimeout);
 
-            wait.Until(driver => driver.FindElement(By.Id(ElementIds.ContentContainer)).FindElements(By.CssSelector(ElementCssRules.Post)).Count == 0);
+            wait.Until(driver => driver.FindElement(By.Id(ElementIds.SearchContentContainer)).FindElements(By.CssSelector(ElementCssRules.Post)).Count == 0);
+
+            return GetContentPaintings(driver);
         }
 
-        public void GoToCatalogs(IWebDriver driver)
+        private List<IWebElement> GetContentPaintings(IWebDriver driver)
+        {
+            _pageElements.GetValueOrDefault(ElementCssRules.ContentContainer).Reinitialize(driver);
+
+            var saContainerSelector = new CssRuleFactory()
+                        .WithTag(HtmlTagNames.Division)
+                        .WithId(ElementIds.SearchContentContainer)
+                        .CompileRule();
+
+            var saContainerElement = _pageElements.GetValueOrDefault(ElementCssRules.ContentContainer)?.
+                Element.FindElement(By.CssSelector(saContainerSelector));
+
+            var postsSelector = new CssRuleFactory()
+                .WithTag(HtmlTagNames.Division)
+                .WithClass(ElementCssRules.Post)
+                .CompileRule();
+
+            return saContainerElement.FindElements(By.CssSelector(postsSelector)).ToList();
+        }
+
+        public bool AnyPaintingContain(IWebDriver driver, string searchQuery)
+        {
+            var paintingContents = GetContentPaintings(driver).Select(p => p.Text);
+
+            return !string.IsNullOrEmpty(paintingContents.FirstOrDefault(i => i.Contains(searchQuery)));
+        }
+
+        public void GoToCatalogs()
         {
             _pageElements.GetValueOrDefault(ElementNames.CatalogButton)?.Element?.Click();
         }

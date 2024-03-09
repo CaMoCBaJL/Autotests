@@ -2,6 +2,6 @@
 {
     public class ElementIds
     {
-        public const string ContentContainer = "sa_container";
+        public const string SearchContentContainer = "sa_container";
     }
 }

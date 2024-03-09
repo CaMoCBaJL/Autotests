@@ -15,5 +15,7 @@
         public const string Button = "button";
 
         public const string Anchor = "a";
+
+        public const string LineBreak = "br";
     }
 }

@@ -16,7 +16,7 @@
 
         public const string Post = "post";
 
-        public const string ItemName = "ssize";
+        public const string ItemInfoContainer = "ssize";
 
         public const string SearchButton = "control.scLarge";
 

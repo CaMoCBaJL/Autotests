@@ -10,5 +10,10 @@ namespace Autotests.PlatformAdapter.Shared.Entities
         {
             get => PageElement<IWebElement>.Empty as DomElement;
         }
+
+        public virtual void Reinitialize(IWebDriver driver)
+        {
+            Element = InitializerFunction?.Invoke(driver);
+        }
     }
 }

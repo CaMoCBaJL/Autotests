@@ -156,7 +156,7 @@ namespace Autotests.Tests.ArtNow.Pages
             return saContainerElement.FindElements(By.CssSelector(postsSelector)).ToList();
         }
 
-        public bool AnyPaintingContain(IWebDriver driver, string searchQuery)
+        public bool FirstPaintingContain(IWebDriver driver, string searchQuery)
         {
             var paintingContents = GetContentPaintings(driver).Select(p => p.Text);
 

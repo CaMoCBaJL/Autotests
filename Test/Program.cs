@@ -15,8 +15,10 @@ namespace Test
 
             var homePage = HomePage.Create(driver);
             homePage.Search(driver, "Жираф");
-            if (!homePage.AnyPaintingContain(driver, "Жираф"))
-                adapter.SaveScreenShot(adapter.CreateScreenShot(), "C:\\images\\1.png");
+            if (!homePage.FirstPaintingContain(driver, "Жираф"))
+            {
+                var _ = adapter.CreateScreenShot();
+            }
         }
     }
 }

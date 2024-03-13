@@ -21,9 +21,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Autotests.Tests.ArtNow.Page
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Autotests.Tests.ArtNow.Shared", "Autotests.Tests.ArtNow.Constants\Autotests.Tests.ArtNow.Shared.csproj", "{CF787695-B73B-48B3-AD90-1B5B36D9CD34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autotests.Tests.ArtNow.UseCases", "Autotests.Tests.ArtNow.UseCases\Autotests.Tests.ArtNow.UseCases.csproj", "{FE018CC2-F7AC-4303-B950-9465662601B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Autotests.Tests.ArtNow.UseCases", "Autotests.Tests.ArtNow.UseCases\Autotests.Tests.ArtNow.UseCases.csproj", "{FE018CC2-F7AC-4303-B950-9465662601B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{FBA87879-4519-4439-AB6C-89F2BEF07699}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "Test\Test.csproj", "{FBA87879-4519-4439-AB6C-89F2BEF07699}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{C44C6347-E783-41E0-AE76-28D579DFBBEB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{FBA87879-4519-4439-AB6C-89F2BEF07699}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FBA87879-4519-4439-AB6C-89F2BEF07699}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FBA87879-4519-4439-AB6C-89F2BEF07699}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C44C6347-E783-41E0-AE76-28D579DFBBEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C44C6347-E783-41E0-AE76-28D579DFBBEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C44C6347-E783-41E0-AE76-28D579DFBBEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C44C6347-E783-41E0-AE76-28D579DFBBEB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

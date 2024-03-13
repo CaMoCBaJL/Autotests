@@ -7,7 +7,7 @@ using OpenQA.Selenium.Support.UI;
 
 namespace Autotests.PlatformAdapter.Web
 {
-    public class BrowserAdapter: TestPlatform
+    public class BrowserAdapter: TestPlatform, IDisposable
     {
         private readonly string _url;
         private IWebDriver _driver;
@@ -52,8 +52,9 @@ namespace Autotests.PlatformAdapter.Web
             screenshot.SaveAsFile(fileName);
         }
 
-        ~BrowserAdapter() 
+        public void Dispose()
         {
+            _driver.Close();
             _driver.Quit();
         }
     }

@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="NUnit.Allure" Version="1.2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Autotests.PlatformAdapter\Autotests.PlatformAdapter.csproj" />
     <ProjectReference Include="..\Autotests.Tests.ArtNow\Autotests.Tests.ArtNow.Pages.csproj" />
   </ItemGroup>

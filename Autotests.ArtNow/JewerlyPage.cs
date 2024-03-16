@@ -8,7 +8,7 @@ using OpenQA.Selenium.Support.UI;
 
 namespace Autotests.ArtNow.Pages
 {
-    public class BatikPaintingsPage: WebPage
+    public class JewerlyPage: WebPage
     {
         protected override void CreatePageContent()
         {
@@ -26,51 +26,38 @@ namespace Autotests.ArtNow.Pages
                     return driver.FindElement(By.CssSelector(contentContainerSelector));
                 }
             });
-
-            _pageElements.Add(ElementCssRules.FavoritePaintingsIcon, new DomElement()
-            {
-                InitializerFunction = driver =>
-                {
-                    var favoritePaintingsIconSelector = new CssRuleFactory()
-                        .WithTag(HtmlTagNames.Span)
-                        .WithClass(ElementCssRules.FavoritePaintingsIcon) 
-                        .CompileRule();
-
-                    return driver.FindElement(By.CssSelector(favoritePaintingsIconSelector));
-                }
-            });
         }
 
-        public static new BatikPaintingsPage Create(IWebDriver webDriver)
+        public static new JewerlyPage Create(IWebDriver webDriver)
         {
-            var batikPaintingsPage = new BatikPaintingsPage();
+            var jewerlyPage = new JewerlyPage();
 
-            batikPaintingsPage.CreatePageContent();
-            batikPaintingsPage.ValidatePageContent();
-            batikPaintingsPage.InitializePageContent(webDriver);
+            jewerlyPage.CreatePageContent();
+            jewerlyPage.ValidatePageContent();
+            jewerlyPage.InitializePageContent(webDriver);
 
-            return batikPaintingsPage;
+            return jewerlyPage;
         }
 
-        public void AddFirstPaintigToFavorites(IWebDriver driver)
+        public void AddFirstPaintigToCart(IWebDriver driver)
         {
             var firstPainting = GetContentPaintings(driver)?.FirstOrDefault();
 
             var addToFavoriteSelector = new CssRuleFactory()
                 .WithTag(HtmlTagNames.Division)
-                .WithClass(ElementCssRules.AddToFavorite)
+                .WithClass(ElementCssRules.BuyPainting)
                 .CompileRule();
 
             firstPainting.FindElement(By.CssSelector(addToFavoriteSelector))?.Click();
         }
 
-        public string GetFirstPaintingInfo(IWebDriver driver)
+        public string GetFirstPaintingPrice(IWebDriver driver)
         {
             var firstPainting = GetContentPaintings(driver)?.FirstOrDefault();
 
             var paintigInfoSelector = new CssRuleFactory()
                 .WithTag(HtmlTagNames.Division)
-                .WithClass(ElementCssRules.ItemInfoContainer)
+                .WithClass(ElementCssRules.PaintingPrice)
                 .CompileRule();
 
             return firstPainting?.FindElement(By.CssSelector(paintigInfoSelector)).Text
@@ -78,13 +65,29 @@ namespace Autotests.ArtNow.Pages
                 .Replace(Environment.NewLine, string.Empty);
         }
 
-        public void ShowFavoritePaintings(IWebDriver driver)
+        public void ShowCart(IWebDriver driver)
         {
-            _pageElements.GetValueOrDefault(ElementCssRules.FavoritePaintingsIcon).Element.Click();
+            var goToCartSelector = new CssRuleFactory()
+                .WithTag(HtmlTagNames.Division)
+                .WithClass(ElementCssRules.PaintingAddedToCartModalWindow)
+                .WithChild()
+                .WithTag(HtmlTagNames.Paragraph)
+                .WithChild()
+                .WithTag(HtmlTagNames.Button)
+                .WithClass(ElementCssRules.GoToCartInModal)
+                .CompileRule();
+
+            driver.FindElement(By.CssSelector(goToCartSelector))?.Click();
 
             var wait = new WebDriverWait(driver, PlatformConstants.DefaultBroswserActionTimeout);
 
-            wait.Until(driver => driver.FindElement(By.Id(ElementIds.SearchContentContainer)).FindElements(By.CssSelector(ElementCssRules.Post)).Count == 0);
+            _pageElements.GetValueOrDefault(ElementCssRules.ContentContainer).Reinitialize(driver);
+            var cartRowSelector = new CssRuleFactory()
+                .WithTag(HtmlTagNames.Division)
+                .WithClass(ElementCssRules.CartItem)
+                .CompileRule();
+
+            wait.Until(driver => _pageElements.GetValueOrDefault(ElementCssRules.ContentContainer)?.Element.FindElements(By.CssSelector(cartRowSelector)).Count > 0);
         }
 
         private List<IWebElement> GetContentPaintings(IWebDriver driver)

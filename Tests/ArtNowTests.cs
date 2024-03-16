@@ -104,6 +104,16 @@ namespace Autotests.ArtNow.Tests
 
             var catalogsPage = pageFactory.CreateCatalogsPage();
             catalogsPage.ShowJewerly();
+
+            var jewerlyPage = pageFactory.CreateJewerlyPage();
+            var firstJewerlyPrice = jewerlyPage.GetFirstPaintingPrice(_driver);
+            jewerlyPage.AddFirstPaintigToCart(_driver);
+            jewerlyPage.ShowCart(_driver);
+
+            var cartPage = pageFactory.CreateCartPage();
+            var itemPriceInCart = cartPage.GetFirstPaintingPrice(_driver);
+
+            Assert.That(firstJewerlyPrice == itemPriceInCart);
         }
 
         [OneTimeTearDown]

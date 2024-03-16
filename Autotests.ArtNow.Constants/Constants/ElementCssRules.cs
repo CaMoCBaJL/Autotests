@@ -37,5 +37,15 @@
         public const string FavoritePaintingsIcon = "fvtico";
 
         public const string CartIcon = "basketico";
+
+        public const string PaintingPrice = "price";
+
+        public const string BuyPainting = "oclick";
+
+        public const string GoToCartInModal = "ok-button";
+
+        public const string PaintingAddedToCartModalWindow = "cmodal-guts";
+
+        public const string CartItem = "c_row";
     }
 }

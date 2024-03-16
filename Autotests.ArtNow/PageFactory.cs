@@ -40,5 +40,15 @@ namespace Autotests.ArtNow.Pages
         {
             return FavoritePaintingsPage.Create(_driver);
         }
+
+        public JewerlyPage CreateJewerlyPage()
+        {
+            return JewerlyPage.Create(_driver);
+        }
+
+        public CartPage CreateCartPage()
+        {
+            return CartPage.Create(_driver);
+        }
     }
 }

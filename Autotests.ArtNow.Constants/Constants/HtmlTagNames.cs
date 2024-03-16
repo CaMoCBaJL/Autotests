@@ -23,5 +23,7 @@
         public const string FirstSubHeader = "h2";
 
         public const string Label = "label";
+
+        public const string Paragraph = "p";
     }
 }

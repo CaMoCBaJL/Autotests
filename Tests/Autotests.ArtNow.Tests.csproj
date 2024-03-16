@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -28,7 +28,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Autotests.ArtNow\Autotests.ArtNow.Pages.csproj" />
     <ProjectReference Include="..\Autotests.PlatformAdapter\Autotests.PlatformAdapter.csproj" />
-    <ProjectReference Include="..\Autotests.Tests.ArtNow\Autotests.Tests.ArtNow.Pages.csproj" />
   </ItemGroup>
 
   <ItemGroup>

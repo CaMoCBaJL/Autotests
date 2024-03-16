@@ -160,7 +160,7 @@ namespace Autotests.ArtNow.Pages
         {
             var paintingContents = GetContentPaintings(driver).Select(p => p.Text);
 
-            return !string.IsNullOrEmpty(paintingContents.FirstOrDefault(i => i.Contains(searchQuery)));
+            return !string.IsNullOrEmpty(paintingContents.Take(1)?.FirstOrDefault(i => i.Contains(searchQuery)));
         }
 
         public void GoToCatalogs()

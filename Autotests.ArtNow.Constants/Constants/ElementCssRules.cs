@@ -21,5 +21,9 @@
         public const string SearchButton = "control.scLarge";
 
         public const string TopMenu = "topmenu";
+
+        public const string GenresList = "seform";
+
+        public const string ImageContainer = "imgcontainer";
     }
 }

@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Autotests.ArtNow.Constants\Autotests..ArtNow.Shared.csproj" />
+    <ProjectReference Include="..\Autotests.ArtNow.Constants\Autotests.ArtNow.Shared.csproj" />
     <ProjectReference Include="..\Autotests.PlatformAdapter.Shared\Autotests.PlatformAdapter.Shared.csproj" />
     <ProjectReference Include="..\Autotests.PlatformAdapter\Autotests.PlatformAdapter.csproj" />
     <ProjectReference Include="..\Autotests.TestUnits\Autotests.TestUnits.csproj" />

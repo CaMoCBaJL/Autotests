@@ -17,9 +17,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ArtNow", "ArtNow", "{826236
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Autotests.ArtNow.Pages", "Autotests.ArtNow\Autotests.ArtNow.Pages.csproj", "{5CCD1284-F2D5-4DC3-92E4-33BAC346BEF5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Autotests..ArtNow.Shared", "Autotests.ArtNow.Constants\Autotests..ArtNow.Shared.csproj", "{37AF856D-56BB-43AC-87A7-A2342B2B2CCE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Autotests.ArtNow.Shared", "Autotests.ArtNow.Constants\Autotests.ArtNow.Shared.csproj", "{37AF856D-56BB-43AC-87A7-A2342B2B2CCE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{404D6A6F-E509-49B5-A331-E2339E61C462}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Autotests.ArtNow.Tests", "Tests\Autotests.ArtNow.Tests.csproj", "{404D6A6F-E509-49B5-A331-E2339E61C462}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +61,7 @@ Global
 		{E79CEE1D-6E24-405E-958D-6C61FB734CE1} = {02DC7C7F-8191-47F9-9187-9C518841FDBD}
 		{5CCD1284-F2D5-4DC3-92E4-33BAC346BEF5} = {82623638-EAE5-41FF-ABEE-EF26E5C0A822}
 		{37AF856D-56BB-43AC-87A7-A2342B2B2CCE} = {82623638-EAE5-41FF-ABEE-EF26E5C0A822}
+		{404D6A6F-E509-49B5-A331-E2339E61C462} = {82623638-EAE5-41FF-ABEE-EF26E5C0A822}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E5B6F634-D99A-4660-ABD1-B1C16B80E6C4}

@@ -15,5 +15,20 @@ namespace Autotests.ArtNow.Pages
         {
             return HomePage.Create(_driver);
         }
+
+        public CatalogsPage CreateCatalogsPage()
+        {
+            return CatalogsPage.Create(_driver);
+        }
+
+        public EmbroidedPaintingsPage CreateEmbroidedPainitingsPage()
+        {
+            return EmbroidedPaintingsPage.Create(_driver);
+        }
+
+        public PaintingDetailsPage CreatePaintingDetailsPage()
+        {
+            return PaintingDetailsPage.Create(_driver);
+        }
     }
 }

@@ -1,4 +1,7 @@
-﻿using Autotests.TestUnits.Web;
+﻿using Autotests.PlatformAdapter.Shared.Entities;
+using Autotests.PlatformAdapter.Web;
+using Autotests.Tests.ArtNow.Shared.Constants;
+using Autotests.TestUnits.Web;
 using OpenQA.Selenium;
 
 namespace Autotests.ArtNow.Pages
@@ -9,12 +12,69 @@ namespace Autotests.ArtNow.Pages
         {
             base.CreatePageContent();
 
-            //_pageElements.Add(ElementCssRules.SearchBar, new DomElement() { InitializerFunction = FindSearchBar });
-            //_pageElements.Add(ElementCssRules.InputSearchBar, new DomElement() { InitializerFunction = FindSearchBarInput });
-            //_pageElements.Add(ElementCssRules.LeftShellNavigation, new DomElement() { InitializerFunction = FindArtTypesList });
-            //_pageElements.Add(ElementCssRules.ContentContainer, new DomElement() { InitializerFunction = FindPaintingsContainer });
-            //_pageElements.Add(ElementCssRules.SearchButton, new DomElement() { InitializerFunction = FindSearchButton });
-            //_pageElements.Add(ElementNames.CatalogButton, new DomElement() { InitializerFunction = FindCatalogButton });
+            _pageElements.Add(ElementCssRules.ContentContainer, new DomElement()
+            {
+                InitializerFunction = driver =>
+                {
+                    var contentContainerSelector = new CssRuleFactory()
+                        .WithTag(HtmlTagNames.Division)
+                        .WithClass(ElementCssRules.ContentContainer)
+                        .CompileRule();
+
+                    return driver.FindElement(By.CssSelector(contentContainerSelector));
+                }
+            });
+
+            _pageElements.Add(ElementNames.EmbroideredPaintings, new DomElement()
+            {
+                InitializerFunction = driver =>
+                {
+                    var chapterItemSelector = new CssRuleFactory()
+                        .WithTag(HtmlTagNames.Anchor)
+                        .WithChild()
+                        .WithTag(HtmlTagNames.Division)
+                        .CompileRule();
+
+                    var chapterElements = _pageElements.GetValueOrDefault(ElementCssRules.ContentContainer).Element
+                       .FindElements(By.CssSelector(chapterItemSelector));
+
+                    return chapterElements.FirstOrDefault(e => e.Text.Contains(ElementNames.EmbroideredPaintings));
+                }
+            });
+
+            _pageElements.Add(ElementNames.Jewerly, new DomElement()
+            {
+                InitializerFunction = driver =>
+                {
+                    var chapterItemSelector = new CssRuleFactory()
+                        .WithTag(HtmlTagNames.Anchor)
+                        .WithChild()
+                        .WithTag(HtmlTagNames.Division)
+                        .CompileRule();
+
+                    var chapterElements = _pageElements.GetValueOrDefault(ElementCssRules.ContentContainer).Element
+                       .FindElements(By.CssSelector(chapterItemSelector));
+
+                    return chapterElements.FirstOrDefault(e => e.Text.Contains(ElementNames.Jewerly));
+                }
+            });
+
+            _pageElements.Add(ElementNames.Batik, new DomElement()
+            {
+                InitializerFunction = driver =>
+                {
+                    var chapterItemSelector = new CssRuleFactory()
+                        .WithTag(HtmlTagNames.Anchor)
+                        .WithChild()
+                        .WithTag(HtmlTagNames.Division)
+                        .CompileRule();
+
+                    var chapterElements = _pageElements.GetValueOrDefault(ElementCssRules.ContentContainer).Element
+                       .FindElements(By.CssSelector(chapterItemSelector));
+
+                    return chapterElements.FirstOrDefault(e => e.Text.Contains(ElementNames.Batik));
+                }
+            });
         }
 
         public static new CatalogsPage Create(IWebDriver webDriver)
@@ -26,6 +86,21 @@ namespace Autotests.ArtNow.Pages
             catalogsPage.InitializePageContent(webDriver);
 
             return catalogsPage;
+        }
+
+        public void ShowEmbroideredPaintings()
+        {
+            _pageElements.GetValueOrDefault(ElementNames.EmbroideredPaintings).Element.Click();
+        }
+
+        public void ShowJewerly()
+        {
+            _pageElements.GetValueOrDefault(ElementNames.Jewerly).Element.Click();
+        }
+
+        public void ShowBatik()
+        {
+            _pageElements.GetValueOrDefault(ElementNames.Batik).Element.Click();
         }
     }
 }

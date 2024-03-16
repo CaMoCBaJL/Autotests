@@ -30,5 +30,15 @@ namespace Autotests.ArtNow.Pages
         {
             return PaintingDetailsPage.Create(_driver);
         }
+
+        public BatikPaintingsPage CreateBatikPaintingsPage()
+        {
+            return BatikPaintingsPage.Create(_driver);
+        }
+
+        public FavoritePaintingsPage CreateFavoritePaintingsPage()
+        {
+            return FavoritePaintingsPage.Create(_driver);
+        }
     }
 }

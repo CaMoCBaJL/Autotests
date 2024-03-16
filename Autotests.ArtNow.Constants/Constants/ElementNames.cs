@@ -11,5 +11,7 @@
         public const string Batik = "Батик";
 
         public const string CityScape = "Городской пейзаж";
+
+        public const string PaintingStyleType = "Стиль";
     }
 }

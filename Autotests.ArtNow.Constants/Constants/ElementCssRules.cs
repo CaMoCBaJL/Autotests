@@ -24,6 +24,18 @@
 
         public const string GenresList = "seform";
 
-        public const string ImageContainer = "imgcontainer";
+        public const string PaintingImageContainer = "imgcontainer";
+
+        public const string PaintingInfoContainer = "infocontainer";
+
+        public const string ShareSection = "share";
+
+        public const string TextLine = "txtline.lft";
+
+        public const string AddToFavorite = "heart";
+
+        public const string FavoritePaintingsIcon = "fvtico";
+
+        public const string CartIcon = "basketico";
     }
 }

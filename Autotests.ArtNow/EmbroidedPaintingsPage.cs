@@ -82,7 +82,7 @@ namespace Autotests.ArtNow.Pages
 
             var wait = new WebDriverWait(driver, PlatformConstants.DefaultBroswserActionTimeout);
 
-            wait.Until(driver => driver.FindElement(By.Id(ElementIds.SearchContentContainer)).FindElements(By.CssSelector(ElementCssRules.Post)).Count == 0);
+            wait.Until(_ => GetContentPaintings(driver).Count > 0);
         }
 
         public bool AnyPaintingContain(IWebDriver driver, string searchQuery)
@@ -94,7 +94,9 @@ namespace Autotests.ArtNow.Pages
 
         public void ShowPainitingContaing(IWebDriver driver, string searchQuery)
         {
-            var painting = GetContentPaintings(driver)?.FirstOrDefault(p => p.Text.Contains(searchQuery));
+            var paintings = GetContentPaintings(driver);
+            
+            var painting = paintings?.FirstOrDefault(p => p.Text.Contains(searchQuery));
 
             var nameRefSelector = new CssRuleFactory()
                 .WithTag(HtmlTagNames.Anchor)
@@ -104,7 +106,7 @@ namespace Autotests.ArtNow.Pages
 
             var imageContainerSelector = new CssRuleFactory()
                 .WithTag(HtmlTagNames.Division)
-                .WithClass(ElementCssRules.ImageContainer)
+                .WithClass(ElementCssRules.PaintingImageContainer)
                 .CompileRule();
 
             var wait = new WebDriverWait(driver, PlatformConstants.DefaultBroswserActionTimeout);
@@ -129,7 +131,8 @@ namespace Autotests.ArtNow.Pages
                 .WithClass(ElementCssRules.Post)
                 .CompileRule();
 
-            return saContainerElement.FindElements(By.CssSelector(postsSelector)).ToList();
+            var result = saContainerElement.FindElements(By.CssSelector(postsSelector)).ToList();
+            return result;
         }
     }
 }

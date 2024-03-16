@@ -54,7 +54,7 @@ namespace Autotests.ArtNow.Tests
         }
 
         [Test]
-        public void Check_IsTramWayPaintingStyle_IsRealism()
+        public void Check_TramWayPaintingStyle_IsRealism()
         {
             var pageFactory = new PageFactory(_driver);
 
@@ -67,9 +67,9 @@ namespace Autotests.ArtNow.Tests
             var embroidedPage = pageFactory.CreateEmbroidedPainitingsPage();
             embroidedPage.SearchCityScapePaintings(_driver);
 
-            Assert.That(embroidedPage.AnyPaintingContain(_driver, "Трамвайный путь"));
-
             embroidedPage.ShowPainitingContaing(_driver, "Трамвайный путь");
+
+            Assert.That(pageFactory.CreatePaintingDetailsPage().ComparePaintingStyle("Реализм"));
         }
 
         [Test]
@@ -82,6 +82,16 @@ namespace Autotests.ArtNow.Tests
 
             var catalogsPage = pageFactory.CreateCatalogsPage();
             catalogsPage.ShowBatik();
+
+            var batikPage = pageFactory.CreateBatikPaintingsPage();
+            var firstBatikPainting = batikPage.GetFirstPaintingInfo(_driver);
+            batikPage.AddFirstPaintigToFavorites(_driver);
+            batikPage.ShowFavoritePaintings(_driver);
+
+            var favoritesPage = pageFactory.CreateFavoritePaintingsPage();
+            var firstFavoriteItem = favoritesPage.GetFirstPaintingInfo(_driver);
+
+            Assert.That(firstBatikPainting == firstFavoriteItem);
         }
 
         [Test]

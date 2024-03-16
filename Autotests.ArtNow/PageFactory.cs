@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
 
-namespace Autotests.Tests.ArtNow.Pages
+namespace Autotests.ArtNow.Pages
 {
     public class PageFactory
     {

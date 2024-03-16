@@ -6,7 +6,7 @@ using Autotests.TestUnits.Web;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
-namespace Autotests.Tests.ArtNow.Pages
+namespace Autotests.ArtNow.Pages
 {
     public class HomePage : WebPage
     {

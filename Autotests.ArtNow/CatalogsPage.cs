@@ -1,11 +1,9 @@
-﻿using Autotests.PlatformAdapter.Shared.Entities;
-using Autotests.Tests.ArtNow.Shared.Constants;
-using Autotests.TestUnits.Web;
+﻿using Autotests.TestUnits.Web;
 using OpenQA.Selenium;
 
-namespace Autotests.Tests.ArtNow.Pages
+namespace Autotests.ArtNow.Pages
 {
-    public class CatalogsPage: WebPage
+    public class CatalogsPage : WebPage
     {
         protected override void CreatePageContent()
         {

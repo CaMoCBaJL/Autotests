@@ -1,7 +1,7 @@
 ﻿using Autotests.PlatformAdapter.Web;
-using Autotests.Tests.ArtNow.Pages;
 using NUnit.Allure.Core;
 using Allure.Net.Commons;
+using Autotests.ArtNow.Pages;
 
 namespace Tests
 {
@@ -18,7 +18,7 @@ namespace Tests
 
                 adapter.OpenUrl();
 
-                var homePage = HomePage.Create(driver);
+                var homePage = new PageFactory(adapter.WebDriver).CreateHomePage();
                 homePage.Search(driver, "Жираф");
                 if (!homePage.FirstPaintingContain(driver, "Жираф"))
                 {

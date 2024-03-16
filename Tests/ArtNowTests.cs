@@ -4,15 +4,14 @@ using Allure.Net.Commons;
 using Autotests.ArtNow.Pages;
 using Autotests.PlatformAdapter.Shared.Enums;
 using OpenQA.Selenium;
-using NUnit.Allure.Attributes;
 using NUnit.Framework.Interfaces;
-using NUnit.Framework.Legacy;
+using NUnit.Allure.Attributes;
 
 namespace Autotests.ArtNow.Tests
 {
     [AllureNUnit]
     [TestFixture]
-    [AllureSuite("1")]
+    [AllureSuite("ArtNow")]
     public class ArtNowsTests
     {
         private BrowserAdapter _browserAdapter;
@@ -116,18 +115,26 @@ namespace Autotests.ArtNow.Tests
             Assert.That(firstJewerlyPrice == itemPriceInCart);
         }
 
+        [Test]
+        public void FailedTest()
+        {
+            Assert.That(1 == 2);
+        }
+
         [OneTimeTearDown]
+        [AllureAfter]
         public void OnTestTearDown()
         {
-            //if (TestContext.CurrentContext.Result.Outcome != ResultState.Success)
-            //{
-            //    AllureApi.AddAttachment($"{TestContext.CurrentContext.Test.MethodName}.png", "image/png", _browserAdapter.CreateScreenShot().AsByteArray);
-            //}
+            if (TestContext.CurrentContext.Result.Outcome != ResultState.Success)
+            {
+                AllureApi.AddAttachment($"{TestContext.CurrentContext.Test.MethodName}.png", "image/png", _browserAdapter.CreateScreenShot().AsByteArray);
+            }
 
             _browserAdapter.Dispose();
+
             //how to generate and serve allure report
             //open ps
-            //cd .\Autotests\Tests\bin\Debug\net8.0
+            //cd .\Tests\bin\Debug\net8.0
             //allure generate
             //allure serve
         }
